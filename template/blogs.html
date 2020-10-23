@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Blogs</title>
+
+  </head>
+<!--  <style>
+body {
+  background-image: url('https://www.google.com/search?q=images+on+mental+health&sxsrf=ALeKk030F3vW_vIdPveJwG1Af_0YqeubWA:1582453476490&tbm=isch&source=iu&ictx=1&fir=-PjqE_g6OXbSpM%253A%252CfXZmWInFtkYlrM%252C_&vet=1&usg=AI4_-kTTmYjb4Z-phz1jXYQfQ1P1sWMbEw&sa=X&ved=2ahUKEwidw9vKuufnAhXfxDgGHcyECq4Q9QEwB3oECAoQMw#imgrc=-PjqE_g6OXbSpM:');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>-->
+  <body background-img=mental-health-2019924_1280.jp>
+
+{% if session.get('uid')!=None and session.get('client')==True:%}
+	
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('help')}}"><b>Help near you</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('test1')}}"><b>Take Test</b></a>
+	      		</li>
+	      		<li class="nav-item active">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		         <b>Profile</b>
+        		</a>
+        		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="{{url_for('editprofile')}}">Edit Profile</a>
+          		<a class="dropdown-item" href="{{url_for('changepswd')}}">Change Password</a>
+         		<a class="dropdown-item" href="{{url_for('messages')}}">Messages</a>
+         		<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+        		</div>
+      			</li>
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+{% elif session.get('uid')!=None and session.get('therapist')==True: %}
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item ">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item active">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		         <b>Profile</b>
+        		</a>
+        		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="{{url_for('changepswd')}}">Change Password</a>
+         		<a class="dropdown-item" href="{{url_for('messages')}}">Messages</a>
+         		<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+        		</div>
+      			</li>
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+
+
+{% else: %}
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Help near you</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Take Test</b></a>
+	      		</li>
+	      		<li class="nav-item active">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item ">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Login/Sign Up</b></a>
+	      		</li>
+
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+{%endif %}
+<div class="jumbotron">
+  <h1 class="display-4">Good Blogs For Life...</h1>
+<!--  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>-->
+  <hr class="my-4">
+  <p><h4>ABOUT DEPRESSION.</h4></p>
+<br><p>
+On occasion everyone feels sad or blue, but these feelings are usually temporary –lasting only a few days. If feelings of depression last for an extended period of time, interfere with daily life and normal functioning you may be suffering from a depressive disorder. Depression is a common but serious illness, and most who experience it need some form of help or treatment to get better.
+
+Depression affects close to 10% of the population. Women experience depression at roughly twice the rate of men. However, intensive research into the illness has resulted in the development of medications, psychotherapies, as well as a variety of self-help techniques that have proven to be very effective in the treatment of depression.
+
+There are several forms of depressive disorders. Read more about depression and the symptoms, causes and treatment options associated with this disabling disorder in our depression therapy section.</p>
+  <a class="btn btn-info btn-lg" href="#" role="button">Learn more</a>
+</div>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Inspirational Videos</h1>
+                  <div class="just-txt-div">
+                      <br />
+                 <iframe class="vedio-style" width="500" height="300" src="https://www.youtube.com/embed/a1Y1ocyudjs"></iframe>
+                      </div>
+                  <div class="just-txt-div">
+                      <br />
+                 <iframe class="vedio-style" width="500" height="300" src="https://www.youtube.com/embed/EmxrCHhazGc"></iframe>
+                      </div>
+
+  </div>
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Test</title>
+  </head>
+  <body>
+  		<script type="text/javascript">
+			function validate()
+			{
+				for(var i=1;i<=18;i++)
+				{
+					var flag = false;
+					var question = "Q"+i;
+					for(var j=0;j<6;j++)
+					{
+						var a = document.getElementsByName(question)[j];
+						if(a.checked==true)
+						{
+							flag = true;
+							break;
+						}
+					}
+					
+					if(flag==false)
+					{
+						alert("Please answer ALL questions");
+						return false;
+					}
+				}
+				return true;						
+			}
+
+			function submit()
+			{
+				document.location.href = "{{url_for('result')}}";
+				return true;
+			}
+
+		</script>
+
+
+{% if session.get('uid')!=None: %}
+	
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('help')}}"><b>Help near you</b></a>
+	      		</li>
+	      		<li class="nav-item active">
+				<a class="nav-link" href="{{url_for('test2')}}"><b>Take Test</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		         <b>Profile</b>
+        		</a>
+        		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="{{url_for('editprofile')}}">Edit Profile</a>
+          		<a class="dropdown-item" href="{{url_for('changepswd')}}">Change Password</a>
+         		<a class="dropdown-item" href="{{url_for('messages')}}">Messages</a>
+         		<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+        		</div>
+      			</li>
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+
+{% else: %}
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Help near you</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Take Test</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item active">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Login/Sign Up</b></a>
+	      		</li>
+
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+{%endif %}
+     <!-- MENU SECTION END-->
+
+<div class=container>
+<table>
+<tr>
+<svg class="bi bi-stopwatch" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8 15A6 6 0 108 3a6 6 0 000 12zm0 1A7 7 0 108 2a7 7 0 000 14z" clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4.5a.5.5 0 010-1h3V5a.5.5 0 01.5-.5zM5.5.5A.5.5 0 016 0h4a.5.5 0 010 1H6a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+  <path d="M7 1h2v2H7V1z"/>
+</svg>
+<div id="countdown"></div>
+<strong><script>
+      var seconds =900;
+      function secondPassed() {
+         var minutes = Math.round((seconds - 30) / 60);
+         var remainingSeconds = seconds % 60;
+         if (remainingSeconds < 10) {
+            remainingSeconds = "0" + remainingSeconds;
+         }
+         document.getElementById("countdown").innerHTML =
+            minutes + ":" + remainingSeconds;
+         if (seconds == 0) {
+            clearInterval(countdownTimer);
+            document.getElementById("my").submit();
+//            document.location.href = "{{url_for('result')}}";
+         } else {
+            seconds--;
+         }
+      }
+      var countdownTimer = setInterval("secondPassed()", 1000);
+
+
+</script><strong></tr>
+<table>
+</div>
+
+ <div class="container-fluid"> 
+    <div class="below-slideshow">
+         <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="txt-block">
+
+              
+									<h1 class="head-line">Take the test and evaluate your mental health</h1>
+								
+                      </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <!-- BELOW SLIDESHOW SECTION END-->
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+             	Given below is a list of statements 
+				<br>Choose between the options
+					<ul>
+						<li>A</li>
+						<li>B</li>
+						<li>C</li>
+						<li>D</li>
+					</ul>
+                 </div>
+            </div>
+          </div>
+     <!-- TAG HOME SECTION END-->
+    <div class="just-sec">
+        <style>
+        table {
+			width : 80%;
+			text-align : center;
+			margin-left:10%; 
+		    margin-right:15%;
+		    border: 15px #5BC0E2;
+		    border-spacing: 10px;
+		}
+		
+		th, td{
+			text-align : center;
+			padding : 10px;
+		}
+		</style>
+        <form method="POST" id="my">
+		<table border = 15>
+		<tr>
+			<th>
+				No.
+			</th>
+			<th>
+				Questions
+			</th>
+			<th>
+				A
+			</th>
+			<th>
+				B
+			</th>
+			<th>
+				C
+			</th>
+			<th>
+				D
+			</th>
+		</tr>
+		{%for i in range(0,15):%}
+			<tr>
+				<td>{%print(i+1)%}.</td><td>{%print(rs[i][0])%}</td>
+				<td><input type="radio" name="Q{%print(i+1)%}" value="{%print(rs[i][1])%}">{%print(rs[i][1])%}</td>
+				<td><input type="radio" name="Q{%print(i+1)%}" value="{%print(rs[i][2])%}">{%print(rs[i][2])%}</td>
+				<td><input type="radio" name="Q{%print(i+1)%}" value="{%print(rs[i][3])%}">{%print(rs[i][3])%}</td>
+				<td><input type="radio" name="Q{%print(i+1)%}" value="{%print(rs[i][4])%}">{%print(rs[i][4])%}</td>
+			</tr>
+		{%endfor%}
+		<tr>
+			<td colspan=8>
+<input   type='submit' value='Submit' >
+</td>
+		</table>	
+		</form>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

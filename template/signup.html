@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Login</title>
+  </head>
+<style>
+table {
+    border-collapse: separate;
+}
+
+td {
+    height: 50px;
+    padding: 5px;    
+}
+body,html{
+	height:100%;
+	width:100%;
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-image: url('https://www.wallpaperflare.com/static/391/732/863/mental-health-wellness-psychology-mind-wallpaper.jpg');
+}
+</style>
+<body>
+{% if session.get('uid')!=None and session.get('client')==True: %}
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('help')}}"><b>Help near you</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('test1')}}"><b>Take Test</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		         <b>Profile</b>
+        		</a>
+        		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="{{url_for('editprofile')}}">Edit Profile</a>
+          		<a class="dropdown-item" href="{{url_for('changepswd')}}">Change Password</a>
+         		<a class="dropdown-item" href="{{url_for('messages')}}">Messages</a>
+         		<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+        		</div>
+      			</li>
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+{% elif session.get('uid')!=None and session.get('therapist')==True: %}
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		         <b>Profile</b>
+        		</a>
+        		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="{{url_for('changepswd')}}">Change Password</a>
+         		<a class="dropdown-item" href="{{url_for('messages')}}">Messages</a>
+         		<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+        		</div>
+      			</li>
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+
+{% else: %}
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+	  		</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item ">
+				<a class="nav-link" href="{{url_for('homepage')}}"><b>Home</b> <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Help near you</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Take Test</b></a>
+	      		</li>
+	      		<li class="nav-item">
+				<a class="nav-link" href="{{url_for('blogs')}}"><b>Blogs</b></a>
+	      		</li>
+	      		<li class="nav-item active">
+				<a class="nav-link" href="{{url_for('login')}}"><b>Login/Sign Up</b></a>
+	      		</li>
+
+	    	</ul>
+	  	</div>
+		</nav>
+	</div>
+{%endif %}
+     <!-- MENU SECTION END-->
+     
+      
+    <div class="just-sec">
+        <script type="text/javascript">
+			function validateSignUp()
+			{
+				//First Name
+				var a = document.getElementsByName('fname')[0].value;
+				if(a=='')
+				{
+					alert("Please enter first name");
+					document.getElementsByName('fname')[0].focus();
+					return false;
+				}
+				else if( !(/^[A-Za-z]/.test(a)) )
+				{
+					alert("Please enter characters");
+					document.getElementsByName('fname')[0].focus();
+					return false;
+				}	
+
+				//Middle Name
+				a = document.getElementsByName('mname')[0].value;
+				if(a=='')
+				{
+					alert("Please enter Middle name");
+					document.getElementsByName('mname')[0].focus();
+					return false;
+				}
+				else if( !(/^[A-Za-z]+$/.test(a)) )
+				{
+					alert("Please enter characters");
+					document.getElementsByName('mname')[0].focus();
+					return false;			
+				}	
+
+				//Last Name
+				a = document.getElementsByName('lname')[0].value;
+				if(a=='')
+				{
+					alert("Please enter Last name");
+					document.getElementsByName('lname')[0].focus();
+					return false;
+				}
+				else if( !(/^[A-Za-z]+$/.test(a)) ) 
+				{
+					alert("Please enter characters");
+					document.getElementsByName('lname')[0].focus();
+					return false;			
+				}			
+
+				//Email-id
+				a = document.getElementsByName('email')[0].value;
+				if(a=='')
+				{
+					alert("Please enter Email id");
+					document.getElementsByName('email')[0].focus();
+					return false;
+				}
+				else if( !(/^\w+\@\w+\.([A-Za-z]{2,4})$/.test(a)) )
+				{
+					alert("Please enter valid Email id");
+					document.getElementsByName('email')[0].focus();
+					return false;			
+				}	
+
+				//Date of birth
+				a = document.getElementsByName('DOB')[0].value;
+				if(a=='')
+				{
+					alert("Please enter Date of Birth");
+					document.getElementsByName('DOB')[0].focus();
+					return false;
+				}
+				else if( (/^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/.test(a)) )
+				{
+					alert("Please enter valid Date of Birth");
+					document.getElementsByName('DOB')[0].focus();
+					return false;			
+				}
+
+				//gender
+				if(document.getElementsByName('gender')[0].checked==false 
+					&& document.getElementsByName('gender')[1].checked==false)
+				{
+					alert("Please select your gender");
+					document.getElementsByName('gender')[0].focus();
+					return false;
+				}
+				//password
+				a = document.getElementsByName('pswd')[0].value;
+				if(a=='')
+				{
+					alert("Please enter Password");
+					document.getElementsByName('pswd')[0].focus();
+					return false;
+				}
+				else if( !(/^[\w+\W+]{8,15}$/.test(a)) )
+				{
+					alert("Please enter 8-15 characters for password");
+					document.getElementsByName('pswd')[0].focus();
+					return false;
+				}
+				a = document.getElementsByName('type')[0].value;
+				return true;
+			}
+	</script>
+        <div class="container"> 
+        <font color="white"><h3>Don't Have an Account?</h3></font>
+        <br>
+        <font color="white"><h1>SIGN UP</h1></font>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:350px;">
+				<form action="" method="POST" onsubmit="return validateSignUp();">
+			<table >
+				<tr> 
+					<td><input type = "text" class="form-control" name = "fname" placeholder = "First Name"></td>
+					<td><input type = "text" class="form-control" name = "mname" placeholder = "Middle Name"></td>
+					<td><input type = "text" class="form-control" name = "lname" placeholder = "Last Name"></td>
+				</tr>
+				<tr>
+					<td><input type = "text" class="form-control" name = "email" placeholder = "Email ID"></td>
+					<td><input type = "text" maxlength="10" class="form-control" name = "phoneno" placeholder = "Phone no"></td>
+					<td><input type = "password" minlength="8" class="form-control" name = "pswd" placeholder = "Password" ></td>
+
+				</tr>
+				<tr>
+					<td><b>Date of Birth</b></td>
+					<td><input type = "date" class="form-control" name = "DOB"></td>
+					<td align="center"><input type="radio"  name=gender value=m>&nbsp;&nbsp;&nbsp;<b>Male</b><br>
+			<input type=radio name=gender value=f>&nbsp;<b>Female</b></td></tr>
+					</td>
+					</td>
+				</tr>	
+				</table><br>
+				<b>Security Question</b>
+					<br><select name = question  class="btn btn-info btn-lg">
+						<option>What is your favorite game?</option>
+						<option>What is your Grandmas name?</option>
+						<option>Where were you born?</option>
+						</select>
+					<br><input type = "text" class="form-control" name = "answer" placeholder = "Enter answer" ><!-- required="required" -->
+					<br><input type = "submit" class="btn btn-info btn-lg" value = "Sign Up"><br>
+		</form>
+			
+            </div>
+           
+        </div>
+             
+    </div>
+    </div>  
+  
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
